@@ -431,3 +431,19 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, label {
   overflow-wrap: break-word;
 }
 
+/* Responsive layout utilities */
+.mobile-only {
+  display: block;
+}
+.desktop-only {
+  display: block;
+}
+
+@media (min-width: 769px) {
+  .mobile-only { display: none !important; }
+}
+@media (max-width: 768px) {
+  .desktop-only { display: none !important; }
+}
+
+

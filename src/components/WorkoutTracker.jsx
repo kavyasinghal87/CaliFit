@@ -288,7 +288,7 @@ export default function WorkoutTracker() {
                         value={set.lbs}
                         disabled={set.done}
                         onChange={(e) => handleInputChange(ex.id, setIdx, 'lbs', e.target.value)}
-                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.85rem', textAlign: 'center' }}
+                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.85rem', textAlign: 'center', width: '100%', minWidth: '0' }}
                       />
                       
                       <input 
@@ -296,7 +296,7 @@ export default function WorkoutTracker() {
                         value={set.reps}
                         disabled={set.done}
                         onChange={(e) => handleInputChange(ex.id, setIdx, 'reps', e.target.value)}
-                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.85rem', textAlign: 'center' }}
+                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.85rem', textAlign: 'center', width: '100%', minWidth: '0' }}
                       />
 
                       <button 
