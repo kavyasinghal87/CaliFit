@@ -94,7 +94,7 @@ export default function LandingPage({ onEnterDashboard }) {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button 
-            onClick={onEnterDashboard}
+            onClick={() => onEnterDashboard('login')}
             style={{ 
               background: 'transparent', 
               border: 'none', 
@@ -109,7 +109,7 @@ export default function LandingPage({ onEnterDashboard }) {
             Login
           </button>
           <button 
-            onClick={onEnterDashboard}
+            onClick={() => onEnterDashboard('signup')}
             className="bg-gradient-emerald-lime"
             style={{ 
               border: 'none', 
@@ -183,7 +183,7 @@ export default function LandingPage({ onEnterDashboard }) {
 
         <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem' }}>
           <button 
-            onClick={onEnterDashboard}
+            onClick={() => onEnterDashboard('signup')}
             className="bg-gradient-emerald-lime animate-pulse-neon"
             style={{ 
               border: 'none', 
@@ -229,7 +229,7 @@ export default function LandingPage({ onEnterDashboard }) {
         <div className="perspective-deck">
           
           {/* CARD 1: SCANNING VIEW */}
-          <div className="card-ppl-3d left" onClick={onEnterDashboard}>
+          <div className="card-ppl-3d left" onClick={() => onEnterDashboard('signup')}>
             <div className="phone-notch"></div>
             
             {/* Camera mock content */}
@@ -287,7 +287,7 @@ export default function LandingPage({ onEnterDashboard }) {
           </div>
 
           {/* CARD 2: MACRO TARGETS VIEW */}
-          <div className="card-ppl-3d center" onClick={onEnterDashboard}>
+          <div className="card-ppl-3d center" onClick={() => onEnterDashboard('signup')}>
             <div className="phone-notch"></div>
             
             {/* Meal plate mock content */}
@@ -370,7 +370,7 @@ export default function LandingPage({ onEnterDashboard }) {
           </div>
 
           {/* CARD 3: BODY TRANSFORMATION VIEW */}
-          <div className="card-ppl-3d right" onClick={onEnterDashboard}>
+          <div className="card-ppl-3d right" onClick={() => onEnterDashboard('signup')}>
             <div className="phone-notch"></div>
             
             {/* Athlete transformation mock content */}

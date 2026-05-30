@@ -12,10 +12,13 @@ import AICoach from './components/AICoach';
 import ProgressTracking from './components/ProgressTracking';
 import Community from './components/Community';
 import AdminPanel from './components/AdminPanel';
+import Auth from './components/Auth';
 
 export default function App() {
   const [theme, setTheme] = useState('dark');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authScreen, setAuthScreen] = useState('landing');
+  const [user, setUser] = useState({ name: 'Kavya Singhal', email: 'kavyabtp2005@gmail.com', avatar: 'KS' });
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
@@ -37,13 +40,17 @@ export default function App() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setAuthScreen('landing');
     showToast("Logged out successfully");
   };
 
-  const handleLogin = () => {
+  const handleLogin = (userData) => {
+    if (userData) {
+      setUser(userData);
+    }
     setIsLoggedIn(true);
     setActiveTab('Dashboard');
-    showToast("Welcome back, Kavya!");
+    showToast(`Welcome back, ${userData?.name || 'Kavya'}!`);
   };
 
   // Meal Planner content for the specialized tab
@@ -122,7 +129,15 @@ export default function App() {
   if (!isLoggedIn) {
     return (
       <>
-        <LandingPage onEnterDashboard={handleLogin} />
+        {authScreen === 'landing' ? (
+          <LandingPage onEnterDashboard={(mode) => setAuthScreen(mode)} />
+        ) : (
+          <Auth 
+            onLoginSuccess={handleLogin} 
+            initialMode={authScreen} 
+            onBackToLanding={() => setAuthScreen('landing')} 
+          />
+        )}
         {toastMessage && (
           <div style={{
             position: 'fixed', bottom: '2rem', left: '50%', transform: 'translateX(-50%)',
@@ -208,9 +223,9 @@ export default function App() {
             <div style={{ 
               width: '36px', height: '36px', borderRadius: '50%', background: 'var(--bg-tertiary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: 'var(--lime)'
-            }}>K</div>
+            }}>{user.avatar}</div>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>Kavya S.</div>
+              <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{user.name}</div>
               <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Premium Member</div>
             </div>
           </div>
