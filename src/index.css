@@ -402,3 +402,32 @@ button {
     transform: scale(1.02) !important;
   }
 }
+
+/* Brand ticker full bleed layout & responsive fallback */
+.brand-ticker-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+}
+
+@media (max-width: 1024px) {
+  .brand-ticker-section {
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* Ensure clean text wrapping and prevent layout breakouts */
+h1, h2, h3, h4, h5, h6, p, span, a, div, label {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+

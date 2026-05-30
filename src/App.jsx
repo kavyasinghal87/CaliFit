@@ -73,7 +73,7 @@ export default function App() {
           <p style={{ fontSize: '0.9rem' }}>Get custom high-protein templates curated by FitSync AI to fit your daily 2,200 kcal budget.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
           {days.map((day) => (
             <div key={day} className="glass-panel" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', justifyBetween: 'space-between', gap: '1rem' }}>
               <div>
@@ -153,7 +153,7 @@ export default function App() {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', position: 'relative', width: '100%', overflowX: 'hidden' }}>
       
       {/* SIDEBAR NAVIGATION - DESKTOP */}
       <aside className="glass-panel desktop-only" style={{ 
@@ -327,6 +327,8 @@ export default function App() {
       {/* MAIN VIEWPORT */}
       <main style={{ 
         flex: 1, 
+        width: '100%',
+        minWidth: 0,
         padding: '2rem', 
         paddingTop: isLoggedIn ? '5rem' : '2rem', // space for mobile header bar
         paddingBottom: isLoggedIn ? '6rem' : '2rem', // space for mobile bottom navigation bar

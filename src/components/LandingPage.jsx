@@ -432,16 +432,9 @@ export default function LandingPage({ onEnterDashboard }) {
       </section>
 
       {/* TRUSTED BY BRAND TICKER */}
-      <section style={{ 
+      <section className="brand-ticker-section" style={{ 
         background: 'rgba(12,20,40,0.4)', 
-        borderY: '1px solid var(--card-border)', 
-        padding: '2.5rem 0',
-        width: '100vw',
-        position: 'relative',
-        left: '50%',
-        right: '50%',
-        marginLeft: '-50vw',
-        marginRight: '-50vw'
+        padding: '2.5rem 0'
       }}>
         <div style={{ textAlign: 'center', marginBottom: '1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', tracking: '0.15em', fontWeight: 700, color: 'var(--text-muted)' }}>
           INTEGRATES WITH THE LEADING BRANDS & NETWORKS • OVER <span className="text-gradient-emerald-lime" style={{ fontWeight: 800 }}>1M+ WORKOUTS</span> LOGGED
@@ -527,7 +520,7 @@ export default function LandingPage({ onEnterDashboard }) {
             The premium all-in-one AI powered health tracker for elite athletes.
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '4rem' }}>
+        <div style={{ display: 'flex', gap: 'clamp(1.5rem, 5vw, 4rem)', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Product</span>
             <span style={{ cursor: 'pointer' }}>Features</span>

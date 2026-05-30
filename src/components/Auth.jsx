@@ -198,10 +198,11 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: '4rem',
+        padding: '2.5rem 3rem',
         position: 'relative',
         zIndex: 2,
-        flexShrink: 0
+        flexShrink: 0,
+        overflowY: 'auto'
       }} className="auth-right-panel">
         
         {/* Toggle sign in / sign up pill at top right corner */}
@@ -258,8 +259,8 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
           </h1>
           <p style={{ 
             fontSize: '0.85rem', 
-            color: '#718096', 
-            marginBottom: '2.5rem',
+            color: '#94a3b8', 
+            marginBottom: '1.25rem',
             lineHeight: 1.4
           }}>
             {isLogin 
@@ -268,7 +269,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
             }
           </p>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             
             {/* Name field (Sign up only) */}
             {!isLogin && (
@@ -431,14 +432,14 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            margin: '2rem 0',
-            color: '#4a5568',
+            margin: '1.25rem 0',
+            color: '#94a3b8',
             fontSize: '0.8rem',
             textTransform: 'lowercase'
           }}>
-            <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }}></div>
+            <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.15)' }}></div>
             <span style={{ padding: '0 1rem' }}>or</span>
-            <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }}></div>
+            <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.15)' }}></div>
           </div>
 
           {/* Social Login buttons */}
@@ -515,10 +516,10 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
 
           {/* Footer toggle text */}
           <div style={{
-            marginTop: '2.5rem',
+            marginTop: '1.25rem',
             textAlign: 'center',
             fontSize: '0.85rem',
-            color: '#718096'
+            color: '#94a3b8'
           }}>
             {isLogin ? "Don't you have an account? " : "Already have an account? "}
             <span
@@ -718,6 +719,23 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
           border-top-color: currentColor;
           border-radius: 50%;
           animation: auth-spin 0.8s linear infinite;
+        }
+
+        .auth-right-panel input {
+          background: #161d28 !important;
+          border: 1px solid rgba(255, 255, 255, 0.08) !important;
+          color: #ffffff !important;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .auth-right-panel input:focus {
+          border-color: #88ef3c !important;
+          background: #1d2635 !important;
+          box-shadow: 0 0 0 3px rgba(136, 239, 60, 0.15) !important;
+        }
+
+        .auth-right-panel input::placeholder {
+          color: rgba(255, 255, 255, 0.38) !important;
         }
 
         @keyframes auth-spin {

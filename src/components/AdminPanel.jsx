@@ -57,7 +57,7 @@ export default function AdminPanel() {
       {/* SYSTEM KPI ROW */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
         gap: '1.5rem'
       }}>
         <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -104,7 +104,7 @@ export default function AdminPanel() {
       {/* ADMIN UTILITIES WORKSPACE */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
         gap: '2rem'
       }}>
         

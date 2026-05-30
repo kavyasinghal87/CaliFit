@@ -214,7 +214,7 @@ export default function WorkoutTracker() {
       {/* COLUMN LAYOUT */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
         gap: '2rem'
       }}>
         
@@ -265,7 +265,7 @@ export default function WorkoutTracker() {
                 </div>
 
                 {/* Sets Header labels */}
-                <div style={{ display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 0.5fr', gap: '1rem', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', paddingLeft: '0.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 0.5fr', gap: 'clamp(0.25rem, 2vw, 1rem)', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', paddingLeft: '0.5rem' }}>
                   <span>SET</span>
                   <span>LBS (WEIGHT)</span>
                   <span>REPS</span>
@@ -276,7 +276,7 @@ export default function WorkoutTracker() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {ex.sets.map((set, setIdx) => (
                     <div key={setIdx} style={{ 
-                      display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 0.5fr', gap: '1rem', alignItems: 'center',
+                      display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 0.5fr', gap: 'clamp(0.25rem, 2vw, 1rem)', alignItems: 'center',
                       padding: '0.35rem 0.5rem', borderRadius: '0.5rem',
                       background: set.done ? 'rgba(16, 185, 129, 0.04)' : 'transparent',
                       transition: 'background 0.2s'
