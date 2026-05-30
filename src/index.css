@@ -446,4 +446,97 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, label {
   .desktop-only { display: none !important; }
 }
 
+/* Landing Page Header & Spacing fixes */
+.landing-nav {
+  margin: 1.5rem auto;
+  max-width: 1200px;
+  width: calc(100% - 2rem);
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.landing-logo-text {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.03em;
+}
+
+.landing-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.landing-login-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.landing-login-btn:hover {
+  opacity: 0.8;
+}
+
+.landing-signup-btn {
+  border: none;
+  color: #080d1a;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(0, 102, 238, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.landing-signup-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 102, 238, 0.4);
+}
+
+@media (max-width: 768px) {
+  .landing-nav {
+    margin: 1rem auto;
+    width: calc(100% - 1.5rem);
+    padding: 0.6rem 1.25rem;
+  }
+  .landing-nav-actions {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-nav {
+    padding: 0.5rem 0.75rem;
+    margin: 0.75rem auto;
+    width: calc(100% - 1rem);
+  }
+  .landing-logo-text {
+    font-size: 1.1rem;
+  }
+  .landing-nav-actions {
+    gap: 0.5rem;
+  }
+  .landing-signup-btn {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.8rem;
+  }
+  .landing-login-btn {
+    font-size: 0.8rem;
+  }
+}
+
+
 

@@ -51,18 +51,7 @@ export default function LandingPage({ onEnterDashboard }) {
     <div className="bg-gradient-dark-glow min-h-screen" style={{ overflowX: 'hidden' }}>
       
       {/* NAVBAR */}
-      <nav className="glass-panel" style={{ 
-        margin: '1.5rem auto', 
-        maxWidth: '1200px', 
-        width: 'calc(100% - 2rem)', 
-        padding: '0.75rem 2rem', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'space-between',
-        position: 'sticky',
-        top: '1rem',
-        zIndex: 100
-      }}>
+      <nav className="glass-panel landing-nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
           <div className="bg-gradient-emerald-lime" style={{ 
             padding: '0.5rem', 
@@ -74,12 +63,7 @@ export default function LandingPage({ onEnterDashboard }) {
           }}>
             <Zap size={20} color="#080d1a" strokeWidth={2.5} />
           </div>
-          <span style={{ 
-            fontFamily: 'var(--font-heading)', 
-            fontWeight: 800, 
-            fontSize: '1.25rem', 
-            letterSpacing: '-0.03em' 
-          }}>
+          <span className="landing-logo-text">
             FIT<span style={{ color: 'var(--emerald)' }}>SYNC</span>
           </span>
         </div>
@@ -92,40 +76,16 @@ export default function LandingPage({ onEnterDashboard }) {
           <a href="#coach" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='var(--text-primary)'} onMouseOut={e=>e.target.style.color='var(--text-secondary)'}>AI Coach</a>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div className="landing-nav-actions">
           <button 
             onClick={() => onEnterDashboard('login')}
-            style={{ 
-              background: 'transparent', 
-              border: 'none', 
-              color: 'var(--text-primary)', 
-              fontWeight: 600,
-              fontSize: '0.9rem',
-              transition: 'opacity 0.2s'
-            }}
-            onMouseOver={e=>e.target.style.opacity=0.8}
-            onMouseOut={e=>e.target.style.opacity=1}
+            className="landing-login-btn"
           >
             Login
           </button>
           <button 
             onClick={() => onEnterDashboard('signup')}
-            className="bg-gradient-emerald-lime"
-            style={{ 
-              border: 'none', 
-              color: '#080d1a', 
-              padding: '0.6rem 1.25rem', 
-              borderRadius: '0.75rem', 
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              boxShadow: '0 4px 15px rgba(0, 102, 238, 0.25)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.25rem',
-              transition: 'transform 0.2s, boxShadow 0.2s'
-            }}
-            onMouseOver={e => { e.target.style.transform = 'scale(1.03)'; e.target.style.boxShadow = '0 6px 20px rgba(0, 102, 238, 0.4)'; }}
-            onMouseOut={e => { e.target.style.transform = 'none'; e.target.style.boxShadow = '0 4px 15px rgba(0, 102, 238, 0.25)'; }}
+            className="bg-gradient-emerald-lime landing-signup-btn"
           >
             Get Started <ChevronRight size={16} />
           </button>
