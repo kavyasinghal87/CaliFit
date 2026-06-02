@@ -63,7 +63,7 @@ export default function Dashboard({ theme, toggleTheme }) {
       {/* WELCOME BANNER */}
       <div className="glass-panel" style={{ 
         padding: '2rem', 
-        background: 'linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(12,20,40,0.7) 100%)',
+        background: 'linear-gradient(135deg, rgba(255, 106, 0, 0.15) 0%, rgba(10, 10, 10, 0.7) 100%)',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
@@ -211,7 +211,7 @@ export default function Dashboard({ theme, toggleTheme }) {
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            borderColor: 'rgba(16, 185, 129, 0.2)'
+            borderColor: 'rgba(255, 106, 0, 0.2)'
           }}>
             <Sparkles size={16} className="text-emerald" />
             <span>AI Advice: Load 40g more Protein to maximize gym hypertrophy today!</span>
@@ -248,7 +248,7 @@ export default function Dashboard({ theme, toggleTheme }) {
           {/* STEPS TRACKER */}
           <div className="glass-panel" style={{ padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ background: 'rgba(132, 204, 22, 0.1)', padding: '0.75rem', borderRadius: '0.75rem' }}>
+              <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.75rem', borderRadius: '0.75rem' }}>
                 <Footprints size={24} className="text-lime" />
               </div>
               <div style={{ textAlign: 'left' }}>
@@ -266,7 +266,7 @@ export default function Dashboard({ theme, toggleTheme }) {
 
           {/* WEIGHT CARD */}
           <div className="glass-panel" style={{ padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '0.75rem', borderRadius: '0.75rem' }}>
+            <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.75rem', borderRadius: '0.75rem' }}>
               <Scale size={24} className="text-emerald" />
             </div>
             <div style={{ textAlign: 'left' }}>

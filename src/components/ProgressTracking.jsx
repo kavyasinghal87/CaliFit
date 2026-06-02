@@ -29,8 +29,8 @@ export default function ProgressTracking() {
         alignItems: 'center', 
         flexWrap: 'wrap',
         gap: '1.5rem',
-        background: 'linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(132,204,22,0.05) 100%)',
-        borderColor: 'rgba(16, 185, 129, 0.2)'
+        background: 'linear-gradient(135deg, rgba(255, 106, 0, 0.1) 0%, rgba(255, 140, 26, 0.05) 100%)',
+        borderColor: 'rgba(255, 106, 0, 0.2)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', textAlign: 'left' }}>
           <div style={{ position: 'relative', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -67,7 +67,7 @@ export default function ProgressTracking() {
           onClick={() => setXpPoints(prev => Math.min(nextLevelXp, prev + 100))}
           className="glass-panel"
           style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--emerald)', borderColor: 'var(--emerald)', background: 'transparent' }}
-          onMouseOver={e=>{e.target.style.background='var(--emerald)'; e.target.style.color='#080d1a'}}
+          onMouseOver={e=>{e.target.style.background='var(--emerald)'; e.target.style.color='#ffffff'}}
           onMouseOut={e=>{e.target.style.background='transparent'; e.target.style.color='var(--emerald)'}}
         >
           + Claim 100 Daily XP
@@ -99,7 +99,7 @@ export default function ProgressTracking() {
             <div style={{ position: 'absolute', bottom: '0.75rem', left: '0.75rem', background: 'rgba(8,13,26,0.7)', backdropFilter: 'blur(4px)', padding: '0.25rem 0.75rem', borderRadius: '0.5rem', fontSize: '0.75rem', fontWeight: 700 }}>
               Day 1: 79.5 kg
             </div>
-            <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', background: 'rgba(16,185,129,0.85)', padding: '0.25rem 0.75rem', borderRadius: '0.5rem', fontSize: '0.75rem', fontWeight: 700, color: '#080d1a' }}>
+            <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', background: 'rgba(255, 106, 0, 0.85)', padding: '0.25rem 0.75rem', borderRadius: '0.5rem', fontSize: '0.75rem', fontWeight: 700, color: '#ffffff' }}>
               Day 90: 76.8 kg
             </div>
           </div>
@@ -125,8 +125,8 @@ export default function ProgressTracking() {
                   alignItems: 'center', 
                   gap: '1rem',
                   opacity: item.unlocked ? 1 : 0.45,
-                  background: item.unlocked ? 'rgba(16, 185, 129, 0.02)' : 'transparent',
-                  borderColor: item.unlocked ? 'rgba(16, 185, 129, 0.25)' : 'var(--card-border)'
+                  background: item.unlocked ? 'rgba(255, 106, 0, 0.02)' : 'transparent',
+                  borderColor: item.unlocked ? 'rgba(255, 106, 0, 0.25)' : 'var(--card-border)'
                 }}
               >
                 <div style={{ 

@@ -9,9 +9,305 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Premium Cursor Styles -->
+    <style>
+      @media (min-width: 769px) {
+        /* Hide default arrow cursor */
+        html.custom-cursor-active,
+        html.custom-cursor-active * {
+          cursor: none;
+        }
+        
+        /* Restore standard hand/pointer cursor ONLY on genuinely interactive elements */
+        html.custom-cursor-active a,
+        html.custom-cursor-active button,
+        html.custom-cursor-active select,
+        html.custom-cursor-active input[type="button"],
+        html.custom-cursor-active input[type="submit"],
+        html.custom-cursor-active input[type="image"],
+        html.custom-cursor-active [role="button"],
+        html.custom-cursor-active [role="link"],
+        html.custom-cursor-active .cursor-pointer,
+        html.custom-cursor-active [style*="cursor: pointer"],
+        html.custom-cursor-active [style*="cursor:pointer"] {
+          cursor: pointer !important;
+        }
+
+        /* Show default text cursor on form inputs/text fields */
+        html.custom-cursor-active input[type="text"],
+        html.custom-cursor-active input[type="email"],
+        html.custom-cursor-active input[type="password"],
+        html.custom-cursor-active input[type="number"],
+        html.custom-cursor-active textarea {
+          cursor: text !important;
+        }
+        
+        .custom-cursor-dot {
+          width: 5px;
+          height: 5px;
+          background-color: #FF6A00;
+          border-radius: 50%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          pointer-events: none;
+          z-index: 100000;
+          will-change: transform;
+        }
+
+        .custom-cursor-ring {
+          width: 30px;
+          height: 30px;
+          border: 1px solid rgba(255, 106, 0, 0.35);
+          border-radius: 50%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          pointer-events: none;
+          z-index: 99999;
+          will-change: transform;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Premium Custom Animated Cursor Script -->
+    <script>
+      (function() {
+        // Precise mobile/tablet detection (ignores touchscreen desktop PCs)
+        const isMobileTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(navigator.userAgent);
+        if (isMobileTablet || window.innerWidth <= 768) return;
+
+        // Prevent duplicate installations on hot reloads
+        if (document.querySelector('.custom-cursor-dot')) return;
+
+        // Inject HTML elements dynamically to prevent editing main body structure
+        const dot = document.createElement('div');
+        dot.className = 'custom-cursor-dot';
+        const ring = document.createElement('div');
+        ring.className = 'custom-cursor-ring';
+
+        document.body.appendChild(ring);
+        document.body.appendChild(dot);
+
+        // Add activation class to document and body to trigger default cursor hiding in CSS
+        document.documentElement.classList.add('custom-cursor-active');
+        document.body.classList.add('custom-cursor-active');
+
+        // Check if GSAP is loaded for animations, define a fallback flag
+        const hasGSAP = typeof gsap !== 'undefined';
+
+        if (hasGSAP) {
+          gsap.set(ring, { xPercent: -50, yPercent: -50, transformOrigin: 'center center' });
+          gsap.set(dot, { xPercent: -50, yPercent: -50, transformOrigin: 'center center' });
+        }
+
+        // Mouse position tracking
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        let dotX = mouseX;
+        let dotY = mouseY;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        // Motion physics: Dot is highly responsive, Ring has a gentle fluid trail lag
+        const dotEase = 0.50;
+        const ringEase = 0.16;
+
+        let isHovering = false;
+        let isClicked = false;
+        let activeMagnetElement = null;
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
+
+        window.addEventListener('mousedown', () => { isClicked = true; });
+        window.addEventListener('mouseup', () => { isClicked = false; });
+
+        // Track hovering for genuinely interactive elements
+        function setupInteractiveHover() {
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(el => {
+            if (el.dataset.cursorBound) return;
+
+            // Genuinely interactive target detection
+            const isInteractive = el.tagName === 'A' || 
+                                  el.tagName === 'BUTTON' || 
+                                  el.tagName === 'SELECT' || 
+                                  el.tagName === 'TEXTAREA' || 
+                                  el.tagName === 'INPUT' || 
+                                  el.getAttribute('role') === 'button' ||
+                                  el.getAttribute('role') === 'link' ||
+                                  el.classList.contains('cursor-pointer') ||
+                                  el.hasAttribute('onclick') ||
+                                  el.hasAttribute('onClick') ||
+                                  (el.style && el.style.cursor === 'pointer');
+
+            if (isInteractive) {
+              el.dataset.cursorBound = 'true';
+
+              el.addEventListener('mouseenter', () => {
+                isHovering = true;
+                
+                // Magnetic attraction only on small interactive items (buttons, icons, small controls)
+                const rect = el.getBoundingClientRect();
+                if (rect.width < 120 && rect.height < 120) {
+                  activeMagnetElement = el;
+                }
+
+                // Apply a premium visual highlight only to clickable interactive elements
+                if (el.tagName === 'BUTTON' || el.tagName === 'A' || el.getAttribute('role') === 'button' || el.classList.contains('cursor-pointer')) {
+                  if (!el.dataset.origTransform) el.dataset.origTransform = el.style.transform || 'none';
+                  if (!el.dataset.origBoxShadow) el.dataset.origBoxShadow = el.style.boxShadow || 'none';
+                  if (!el.dataset.origBorderColor) el.dataset.origBorderColor = el.style.borderColor || '';
+
+                  el.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease';
+                  
+                  const baseTransform = el.dataset.origTransform === 'none' ? '' : el.dataset.origTransform;
+                  el.style.transform = `${baseTransform} scale(1.025)`.trim();
+                  el.style.borderColor = 'rgba(255, 106, 0, 0.45)';
+                  el.style.boxShadow = '0 0 15px rgba(255, 106, 0, 0.12)';
+                }
+              });
+
+              el.addEventListener('mouseleave', () => {
+                isHovering = false;
+                activeMagnetElement = null;
+
+                // Revert to original styling if altered
+                if (el.dataset.origTransform) {
+                  el.style.transform = el.dataset.origTransform;
+                  el.style.boxShadow = el.dataset.origBoxShadow;
+                  el.style.borderColor = el.dataset.origBorderColor;
+                }
+              });
+            }
+          });
+        }
+
+        setupInteractiveHover();
+        // Periodically scan DOM for dynamically updated elements (e.g. React view changes)
+        setInterval(setupInteractiveHover, 1000);
+
+        let currentBaseScale = 1.0;
+        let currentDotScale = 1.0;
+
+        function renderLoop() {
+          // Dynamically check if we are on the landing page
+          const isLandingPageActive = document.querySelector('.landing-nav') !== null;
+
+          if (!isLandingPageActive) {
+            // Disable custom cursor and restore system cursor on internal/application screens
+            dot.style.display = 'none';
+            ring.style.display = 'none';
+            document.documentElement.classList.remove('custom-cursor-active');
+            document.body.classList.remove('custom-cursor-active');
+            requestAnimationFrame(renderLoop);
+            return;
+          } else {
+            // Enable custom cursor on landing page
+            dot.style.display = '';
+            ring.style.display = '';
+            document.documentElement.classList.add('custom-cursor-active');
+            document.body.classList.add('custom-cursor-active');
+          }
+
+          // Calculate physics for cursor position
+          if (activeMagnetElement) {
+            const rect = activeMagnetElement.getBoundingClientRect();
+            const elX = rect.left + rect.width / 2;
+            const elY = rect.top + rect.height / 2;
+
+            // Pull coordinates 40% towards element center, 60% towards mouse coordinates
+            const targetX = elX + (mouseX - elX) * 0.6;
+            const targetY = elY + (mouseY - elY) * 0.6;
+
+            dotX += (targetX - dotX) * dotEase;
+            dotY += (targetY - dotY) * dotEase;
+
+            ringX += (targetX - ringX) * ringEase;
+            ringY += (targetY - ringY) * ringEase;
+          } else {
+            // Normal position interpolation
+            dotX += (mouseX - dotX) * dotEase;
+            dotY += (mouseY - dotY) * dotEase;
+
+            ringX += (mouseX - ringX) * ringEase;
+            ringY += (mouseY - ringY) * ringEase;
+
+            // Snap instantly when very close to target to prevent any settle misalignment
+            if (Math.hypot(mouseX - ringX, mouseY - ringY) < 0.25) {
+              ringX = mouseX;
+              ringY = mouseY;
+              dotX = mouseX;
+              dotY = mouseY;
+            }
+          }
+
+          // Transition cursor state scales and styles
+          let targetBaseScale = 1.0;
+          let targetDotScale = 1.0;
+          let targetRingBorderColor = 'rgba(255, 106, 0, 0.35)';
+          let targetRingBg = 'rgba(255, 106, 0, 0)';
+          let targetRingGlow = 'none';
+
+          if (isHovering) {
+            targetBaseScale = 1.45;
+            targetDotScale = 0.75;
+            targetRingBorderColor = 'rgba(255, 106, 0, 0.7)';
+            targetRingBg = 'rgba(255, 106, 0, 0.04)';
+            targetRingGlow = '0 0 10px rgba(255, 106, 0, 0.2)';
+          }
+
+          if (isClicked) {
+            targetBaseScale *= 0.8;
+            targetDotScale *= 1.4;
+            targetRingBg = 'rgba(255, 106, 0, 0.2)';
+          }
+
+          currentBaseScale += (targetBaseScale - currentBaseScale) * 0.15;
+          currentDotScale += (targetDotScale - currentDotScale) * 0.2;
+
+          if (hasGSAP) {
+            gsap.set(ring, {
+              x: ringX,
+              y: ringY,
+              scale: currentBaseScale,
+              borderColor: targetRingBorderColor,
+              backgroundColor: targetRingBg,
+              boxShadow: targetRingGlow
+            });
+            gsap.set(dot, {
+              x: dotX,
+              y: dotY,
+              scale: currentDotScale
+            });
+          } else {
+            // CSS fallback
+            ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${currentBaseScale})`;
+            ring.style.borderColor = targetRingBorderColor;
+            ring.style.backgroundColor = targetRingBg;
+            ring.style.boxShadow = targetRingGlow;
+
+            dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%) scale(${currentDotScale})`;
+          }
+
+          requestAnimationFrame(renderLoop);
+        }
+
+        // Initialize the loop
+        requestAnimationFrame(renderLoop);
+      })();
+    </script>
   </body>
 </html>

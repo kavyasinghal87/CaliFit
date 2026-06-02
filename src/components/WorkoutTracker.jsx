@@ -174,11 +174,11 @@ export default function WorkoutTracker() {
         alignItems: 'center', 
         flexWrap: 'wrap', 
         gap: '1rem',
-        background: 'linear-gradient(135deg, rgba(132,204,22,0.15) 0%, rgba(12,20,40,0.7) 100%)',
+        background: 'linear-gradient(135deg, rgba(255, 106, 0, 0.15) 0%, rgba(10, 10, 10, 0.7) 100%)',
         borderLeft: '5px solid var(--lime)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', textAlign: 'left' }}>
-          <div style={{ background: 'rgba(132, 204, 22, 0.1)', padding: '0.75rem', borderRadius: '0.75rem' }}>
+          <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.75rem', borderRadius: '0.75rem' }}>
             <Clock size={28} className="text-lime" />
           </div>
           <div>
@@ -195,10 +195,10 @@ export default function WorkoutTracker() {
 
           {!isWorkoutActive ? (
             <button onClick={handleStartWorkout} className="bg-gradient-emerald-lime" style={{ 
-              padding: '0.75rem 1.5rem', border: 'none', borderRadius: '0.75rem', color: '#080d1a', fontWeight: 700,
+              padding: '0.75rem 1.5rem', border: 'none', borderRadius: '0.75rem', color: '#ffffff', fontWeight: 700,
               display: 'flex', alignItems: 'center', gap: '0.5rem'
             }}>
-              <Play size={16} fill="#080d1a" /> Start Workout
+              <Play size={16} fill="#ffffff" /> Start Workout
             </button>
           ) : (
             <button onClick={handleCompleteWorkout} style={{ 
@@ -278,7 +278,7 @@ export default function WorkoutTracker() {
                     <div key={setIdx} style={{ 
                       display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 0.5fr', gap: 'clamp(0.25rem, 2vw, 1rem)', alignItems: 'center',
                       padding: '0.35rem 0.5rem', borderRadius: '0.5rem',
-                      background: set.done ? 'rgba(16, 185, 129, 0.04)' : 'transparent',
+                      background: set.done ? 'rgba(255, 106, 0, 0.04)' : 'transparent',
                       transition: 'background 0.2s'
                     }}>
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: set.done ? 'var(--emerald)' : 'var(--text-primary)' }}>{setIdx + 1}</span>
@@ -306,7 +306,7 @@ export default function WorkoutTracker() {
                           width: '24px', height: '24px', borderRadius: '50%',
                           border: set.done ? 'none' : '1px solid var(--border-primary)',
                           background: set.done ? 'var(--emerald)' : 'transparent',
-                          color: set.done ? '#080d1a' : 'transparent',
+                          color: set.done ? '#ffffff' : 'transparent',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
                           cursor: 'pointer',
                           transition: 'all 0.2s'
@@ -341,7 +341,7 @@ export default function WorkoutTracker() {
                     fontSize: '0.8rem',
                     borderColor: timerMaxSeconds === s ? 'var(--lime)' : 'var(--card-border)',
                     color: timerMaxSeconds === s ? 'var(--lime)' : 'var(--text-secondary)',
-                    background: timerMaxSeconds === s ? 'rgba(132, 204, 22, 0.05)' : 'transparent'
+                    background: timerMaxSeconds === s ? 'rgba(255, 106, 0, 0.08)' : 'transparent'
                   }}
                 >
                   {s}s
@@ -378,11 +378,11 @@ export default function WorkoutTracker() {
                     let bg = 'rgba(18, 31, 58, 0.3)';
                     let border = '1px solid rgba(30, 48, 86, 0.4)';
                     if (val > 0 && val <= 45) {
-                      bg = 'rgba(16, 185, 129, 0.25)';
-                      border = '1px solid rgba(16, 185, 129, 0.4)';
+                      bg = 'rgba(255, 106, 0, 0.2)';
+                      border = '1px solid rgba(255, 106, 0, 0.35)';
                     } else if (val > 45 && val <= 60) {
-                      bg = 'rgba(16, 185, 129, 0.5)';
-                      border = '1px solid rgba(16, 185, 129, 0.7)';
+                      bg = 'rgba(255, 106, 0, 0.5)';
+                      border = '1px solid rgba(255, 106, 0, 0.65)';
                     } else if (val > 60) {
                       bg = 'var(--emerald)';
                       border = 'none';
@@ -409,9 +409,9 @@ export default function WorkoutTracker() {
 
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', fontSize: '0.7rem', marginTop: '1rem', alignItems: 'center' }}>
               <span>Less</span>
-              <div style={{ width: '10px', height: '10px', background: 'rgba(18, 31, 58, 0.3)', borderRadius: '2px' }}></div>
-              <div style={{ width: '10px', height: '10px', background: 'rgba(16, 185, 129, 0.25)', borderRadius: '2px' }}></div>
-              <div style={{ width: '10px', height: '10px', background: 'rgba(16, 185, 129, 0.6)', borderRadius: '2px' }}></div>
+              <div style={{ width: '10px', height: '10px', background: 'var(--bg-tertiary)', borderRadius: '2px' }}></div>
+              <div style={{ width: '10px', height: '10px', background: 'rgba(255, 106, 0, 0.2)', borderRadius: '2px' }}></div>
+              <div style={{ width: '10px', height: '10px', background: 'rgba(255, 106, 0, 0.5)', borderRadius: '2px' }}></div>
               <div style={{ width: '10px', height: '10px', background: 'var(--emerald)', borderRadius: '2px' }}></div>
               <span>More</span>
             </div>
@@ -421,8 +421,8 @@ export default function WorkoutTracker() {
           <div className="glass-panel" style={{ 
             padding: '1.5rem', 
             textAlign: 'left',
-            background: 'linear-gradient(135deg, rgba(132,204,22,0.08) 0%, rgba(16,185,129,0.03) 100%)',
-            borderColor: 'rgba(132, 204, 22, 0.25)'
+            background: 'linear-gradient(135deg, rgba(255, 106, 0, 0.1) 0%, rgba(255, 140, 26, 0.03) 100%)',
+            borderColor: 'rgba(255, 106, 0, 0.25)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
               <Sparkles size={16} className="text-lime" />
@@ -441,7 +441,7 @@ export default function WorkoutTracker() {
         <div style={{
           position: 'fixed', bottom: '2rem', right: '2rem', width: '320px', zIndex: 1000,
         }} className="glass-panel animate-fade-in-up glow-lime">
-          <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '1.25rem', border: '1px solid rgba(132, 204, 22, 0.3)' }}>
+          <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '1.25rem', border: '1px solid rgba(255, 106, 0, 0.3)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--lime)', letterSpacing: '0.05em' }}>REST TIME COUNTDOWN</span>
               <button 
@@ -496,7 +496,7 @@ export default function WorkoutTracker() {
         }}>
           <div className="glass-panel animate-fade-in-up" style={{ padding: '3rem 2rem', maxWidth: '450px', width: '90%', textAlign: 'center', border: '1px solid var(--lime)' }}>
             <div style={{
-              background: 'rgba(132, 204, 22, 0.1)', width: 'fit-content', padding: '1rem', borderRadius: '50%', margin: '0 auto 1.5rem',
+              background: 'rgba(255, 106, 0, 0.1)', width: 'fit-content', padding: '1rem', borderRadius: '50%', margin: '0 auto 1.5rem',
               border: '2px solid var(--lime)'
             }}>
               <Trophy size={48} className="text-lime" />
@@ -523,7 +523,7 @@ export default function WorkoutTracker() {
             <button 
               onClick={() => setShowCompletionOverlay(false)}
               className="bg-gradient-emerald-lime"
-              style={{ width: '100%', padding: '0.75rem', border: 'none', borderRadius: '0.75rem', color: '#080d1a', fontWeight: 700 }}
+              style={{ width: '100%', padding: '0.75rem', border: 'none', borderRadius: '0.75rem', color: '#ffffff', fontWeight: 700 }}
             >
               Continue to Dashboard
             </button>

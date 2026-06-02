@@ -94,7 +94,7 @@ export default function AICoach() {
             <div className="bg-gradient-emerald-lime animate-pulse-neon" style={{ 
               padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}>
-              <Sparkles size={18} color="#080d1a" />
+              <Sparkles size={18} color="#ffffff" />
             </div>
             <div>
               <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>FitSync Coach AI</h3>
@@ -132,7 +132,7 @@ export default function AICoach() {
               >
                 <div style={{ 
                   background: isAI ? 'var(--bg-tertiary)' : 'linear-gradient(135deg, var(--emerald) 0%, var(--lime) 100%)',
-                  color: isAI ? 'var(--text-primary)' : '#080d1a',
+                  color: isAI ? 'var(--text-primary)' : '#ffffff',
                   padding: '0.75rem 1.1rem',
                   borderRadius: isAI ? '0.25rem 1rem 1rem 1rem' : '1rem 0.25rem 1rem 1rem',
                   fontSize: '0.9rem',
@@ -253,7 +253,7 @@ export default function AICoach() {
           </div>
 
           <div className="glass-panel" style={{ 
-            marginTop: '1.5rem', padding: '0.75rem 1rem', background: 'rgba(16,185,129,0.05)', borderColor: 'rgba(16,185,129,0.15)', fontSize: '0.8rem'
+            marginTop: '1.5rem', padding: '0.75rem 1rem', background: 'rgba(255, 106, 0, 0.05)', borderColor: 'rgba(255, 106, 0, 0.15)', fontSize: '0.8rem'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontWeight: 700, marginBottom: '0.25rem' }}>
               <Info size={14} className="text-emerald" /> Recommended Action

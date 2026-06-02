@@ -131,7 +131,7 @@ export function CustomAreaChart({ data = [], height = 220 }) {
             fill="none" 
             stroke="var(--emerald)" 
             strokeWidth="3" 
-            style={{ filter: 'drop-shadow(0 2px 6px rgba(16,185,129,0.3))' }}
+            style={{ filter: 'drop-shadow(0 2px 6px rgba(255,106,0,0.3))' }}
           />
         )}
 

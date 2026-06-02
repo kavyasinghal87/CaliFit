@@ -68,7 +68,7 @@ export default function App() {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', textAlign: 'left' }}>
-        <div className="glass-panel" style={{ padding: '1.5rem', background: 'linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(12,20,40,0.7) 100%)', borderLeft: '5px solid var(--emerald)' }}>
+        <div className="glass-panel" style={{ padding: '1.5rem', background: 'linear-gradient(135deg, rgba(255, 106, 0, 0.1) 0%, rgba(10, 10, 10, 0.7) 100%)', borderLeft: '5px solid var(--emerald)' }}>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>Weekly Nutrition Planner</h2>
           <p style={{ fontSize: '0.9rem' }}>Get custom high-protein templates curated by FitSync AI to fit your daily 2,200 kcal budget.</p>
         </div>
@@ -195,7 +195,7 @@ export default function App() {
                   padding: '0.75rem 1rem',
                   borderRadius: '0.75rem',
                   border: 'none',
-                  background: activeTab === link.name ? 'rgba(16, 185, 129, 0.08)' : 'transparent',
+                  background: activeTab === link.name ? 'rgba(255, 106, 0, 0.08)' : 'transparent',
                   color: activeTab === link.name ? 'var(--emerald)' : 'var(--text-secondary)',
                   fontWeight: activeTab === link.name ? 700 : 500,
                   fontSize: '0.9rem',
@@ -300,7 +300,7 @@ export default function App() {
                     style={{
                       display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', padding: '0.75rem 1rem',
                       borderRadius: '0.75rem', border: 'none',
-                      background: activeTab === link.name ? 'rgba(16, 185, 129, 0.08)' : 'transparent',
+                      background: activeTab === link.name ? 'rgba(255, 106, 0, 0.08)' : 'transparent',
                       color: activeTab === link.name ? 'var(--emerald)' : 'var(--text-secondary)',
                       fontWeight: activeTab === link.name ? 700 : 500, fontSize: '0.9rem', textAlign: 'left'
                     }}

@@ -442,11 +442,11 @@ export default function LandingPage({ onEnterDashboard }) {
               gap: '1rem'
             }}>
               <div style={{ 
-                background: 'rgba(16, 185, 129, 0.08)',
+                background: 'rgba(255, 106, 0, 0.08)',
                 width: 'fit-content',
                 padding: '0.75rem',
                 borderRadius: '0.75rem',
-                border: '1px solid rgba(16, 185, 129, 0.15)'
+                border: '1px solid rgba(255, 106, 0, 0.15)'
               }}>
                 {feature.icon}
               </div>

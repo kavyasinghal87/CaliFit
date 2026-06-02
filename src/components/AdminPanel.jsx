@@ -61,7 +61,7 @@ export default function AdminPanel() {
         gap: '1.5rem'
       }}>
         <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
+          <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
             <Users size={20} className="text-emerald" />
           </div>
           <div>
@@ -71,7 +71,7 @@ export default function AdminPanel() {
         </div>
 
         <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ background: 'rgba(132, 204, 22, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
+          <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
             <Activity size={20} className="text-lime" />
           </div>
           <div>
@@ -81,7 +81,7 @@ export default function AdminPanel() {
         </div>
 
         <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
+          <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
             <Database size={20} className="text-emerald" />
           </div>
           <div>
@@ -91,7 +91,7 @@ export default function AdminPanel() {
         </div>
 
         <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ background: 'rgba(132, 204, 22, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
+          <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.6rem', borderRadius: '0.5rem' }}>
             <Server size={20} className="text-lime" />
           </div>
           <div>
@@ -162,7 +162,7 @@ export default function AdminPanel() {
             <h3 style={{ fontSize: '1.1rem', marginBottom: '1.25rem' }}>Add Exercise Template</h3>
 
             {showAddSuccess && (
-              <div className="glass-panel" style={{ padding: '0.75rem', marginBottom: '1rem', background: 'rgba(16,185,129,0.05)', borderColor: 'rgba(16,185,129,0.25)', color: 'var(--emerald)', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div className="glass-panel" style={{ padding: '0.75rem', marginBottom: '1rem', background: 'rgba(255,106,0,0.05)', borderColor: 'rgba(255,106,0,0.25)', color: 'var(--emerald)', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <CheckCircle size={16} /> Movement added to system database template.
               </div>
             )}
@@ -206,7 +206,7 @@ export default function AdminPanel() {
               <button 
                 type="submit" 
                 className="bg-gradient-emerald-lime"
-                style={{ width: '100%', padding: '0.6rem', border: 'none', borderRadius: '0.75rem', color: '#080d1a', fontWeight: 700, fontSize: '0.85rem' }}
+                style={{ width: '100%', padding: '0.6rem', border: 'none', borderRadius: '0.75rem', color: '#ffffff', fontWeight: 700, fontSize: '0.85rem' }}
               >
                 Create Global Template
               </button>

@@ -84,7 +84,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
     <div style={{
       display: 'flex',
       minHeight: '100vh',
-      background: '#090e14',
+      background: '#0A0A0A',
       fontFamily: 'var(--font-sans)',
       color: '#ffffff',
       position: 'fixed',
@@ -116,7 +116,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(to right, rgba(9, 14, 20, 0.4) 0%, rgba(9, 14, 20, 0.8) 100%)',
+          background: 'linear-gradient(to right, rgba(10, 10, 10, 0.4) 0%, rgba(10, 10, 10, 0.8) 100%)',
           zIndex: 1
         }}></div>
 
@@ -140,7 +140,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
             letterSpacing: '-0.04em',
             color: '#ffffff'
           }}>
-            FIT<span style={{ color: '#88ef3c' }}>SYNC</span>
+            FIT<span style={{ color: '#FF6A00' }}>SYNC</span>
           </span>
         </div>
 
@@ -175,7 +175,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                   width: activeSlide === idx ? '24px' : '8px',
                   height: '8px',
                   borderRadius: '999px',
-                  background: activeSlide === idx ? '#88ef3c' : 'rgba(255, 255, 255, 0.3)',
+                  background: activeSlide === idx ? '#FF6A00' : 'rgba(255, 255, 255, 0.3)',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease'
@@ -194,7 +194,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
       {/* RIGHT COLUMN: FITSYNC Dark Neon Sign-In Form */}
       <div style={{
         width: '540px',
-        background: '#090e14',
+        background: '#0A0A0A',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -228,7 +228,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
               fontWeight: 600,
               transition: 'all 0.2s'
             }}
-            onMouseOver={e => { e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.borderColor = '#88ef3c'; }}
+            onMouseOver={e => { e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.borderColor = '#FF6A00'; }}
             onMouseOut={e => { e.target.style.background = 'rgba(255,255,255,0.05)'; e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'; }}
           >
             {isLogin ? "Sign up" : "Sign in"}
@@ -246,7 +246,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
               letterSpacing: '-0.04em',
               color: '#ffffff'
             }}>
-              FIT<span style={{ color: '#88ef3c' }}>SYNC</span>
+              FIT<span style={{ color: '#FF6A00' }}>SYNC</span>
             </span>
           </div>
           <h1 style={{ 
@@ -281,7 +281,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   style={{
-                    background: '#161d28',
+                    background: '#121212',
                     border: '1px solid rgba(255,255,255,0.05)',
                     padding: '0.85rem 1.1rem',
                     borderRadius: '10px',
@@ -303,7 +303,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 style={{
-                  background: '#161d28',
+                  background: '#121212',
                   border: '1px solid rgba(255,255,255,0.05)',
                   padding: '0.85rem 1.1rem',
                   borderRadius: '10px',
@@ -325,7 +325,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   style={{
-                    background: '#161d28',
+                    background: '#121212',
                     border: '1px solid rgba(255,255,255,0.05)',
                     padding: '0.85rem 1.1rem',
                     paddingRight: '3rem',
@@ -374,22 +374,22 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                     height: '16px',
                     borderRadius: '4px',
                     border: '1.5px solid',
-                    borderColor: keepLoggedIn ? '#88ef3c' : '#4a5568',
-                    background: keepLoggedIn ? '#88ef3c' : 'transparent',
+                    borderColor: keepLoggedIn ? '#FF6A00' : '#4a5568',
+                    background: keepLoggedIn ? '#FF6A00' : 'transparent',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  {keepLoggedIn && <Check size={12} color="#090e14" strokeWidth={3} />}
+                  {keepLoggedIn && <Check size={12} color="#0A0A0A" strokeWidth={3} />}
                 </div>
                 <span style={{ color: '#a0aec0' }}>Keep me logged in</span>
               </label>
               <a 
                 href="#forgot" 
                 onClick={(e) => { e.preventDefault(); alert("Verification link sent to your email!"); }}
-                style={{ color: '#88ef3c', textDecoration: 'none', fontWeight: 600 }}
+                style={{ color: '#FF6A00', textDecoration: 'none', fontWeight: 600 }}
               >
                 Forgot Password?
               </a>
@@ -407,15 +407,15 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                 fontSize: '0.95rem',
                 fontWeight: 700,
                 cursor: isFormValid ? 'pointer' : 'not-allowed',
-                background: isFormValid ? '#88ef3c' : '#1a2230',
-                color: isFormValid ? '#090e14' : '#718096',
+                background: isFormValid ? '#FF6A00' : '#1A1A1A',
+                color: isFormValid ? '#FFFFFF' : '#718096',
                 marginTop: '1rem',
                 transition: 'all 0.25s ease',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.5rem',
-                boxShadow: isFormValid ? '0 4px 15px rgba(136, 239, 60, 0.2)' : 'none'
+                boxShadow: isFormValid ? '0 4px 15px rgba(255, 106, 0, 0.2)' : 'none'
               }}
             >
               {isLoading ? (
@@ -449,7 +449,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
             <button
               onClick={() => setIsGoogleModalOpen(true)}
               style={{
-                background: '#161d28',
+                background: '#121212',
                 border: '1px solid rgba(255,255,255,0.05)',
                 padding: '0.8rem',
                 borderRadius: '10px',
@@ -472,7 +472,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
             <button
               onClick={() => alert("Apple Sign-In is simulated: please use Google Sign-In.")}
               style={{
-                background: '#161d28',
+                background: '#121212',
                 border: '1px solid rgba(255,255,255,0.05)',
                 padding: '0.8rem',
                 borderRadius: '10px',
@@ -494,7 +494,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
             <button
               onClick={() => alert("Facebook Sign-In is simulated: please use Google Sign-In.")}
               style={{
-                background: '#161d28',
+                background: '#121212',
                 border: '1px solid rgba(255,255,255,0.05)',
                 padding: '0.8rem',
                 borderRadius: '10px',
@@ -530,7 +530,7 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                 setName('');
               }}
               style={{
-                color: '#88ef3c',
+                color: '#FF6A00',
                 cursor: 'pointer',
                 fontWeight: 700
               }}
@@ -624,8 +624,8 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  background: '#88ef3c',
-                  color: '#090e14',
+                  background: '#FF6A00',
+                  color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '0.8rem',
                   display: 'flex',
@@ -722,16 +722,16 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
         }
 
         .auth-right-panel input {
-          background: #161d28 !important;
-          border: 1px solid rgba(255, 255, 255, 0.08) !important;
+          background: #121212 !important;
+          border: 1px solid #2A2A2A !important;
           color: #ffffff !important;
           transition: all 0.2s ease-in-out;
         }
 
         .auth-right-panel input:focus {
-          border-color: #88ef3c !important;
-          background: #1d2635 !important;
-          box-shadow: 0 0 0 3px rgba(136, 239, 60, 0.15) !important;
+          border-color: #FF6A00 !important;
+          background: #1A1A1A !important;
+          box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.15) !important;
         }
 
         .auth-right-panel input::placeholder {

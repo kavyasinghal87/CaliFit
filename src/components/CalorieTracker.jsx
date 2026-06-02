@@ -204,7 +204,7 @@ export default function CalorieTracker() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.25rem',
-                    color: '#080d1a',
+                    color: '#ffffff',
                     fontWeight: 700
                   }}
                 >
@@ -336,7 +336,7 @@ export default function CalorieTracker() {
                         background: 'transparent',
                         fontWeight: 700
                       }}
-                      onMouseOver={e=>{e.target.style.background='var(--emerald)'; e.target.style.color='#080d1a'}}
+                      onMouseOver={e=>{e.target.style.background='var(--emerald)'; e.target.style.color='#ffffff'}}
                       onMouseOut={e=>{e.target.style.background='transparent'; e.target.style.color='var(--emerald)'}}
                     >
                       + Log
@@ -351,8 +351,8 @@ export default function CalorieTracker() {
           <div className="glass-panel" style={{ 
             padding: '1.5rem', 
             textAlign: 'left',
-            background: 'linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(132,204,22,0.03) 100%)',
-            borderColor: 'rgba(16, 185, 129, 0.25)'
+            background: 'linear-gradient(135deg, rgba(255, 106, 0, 0.08) 0%, rgba(255, 140, 26, 0.03) 100%)',
+            borderColor: 'rgba(255, 106, 0, 0.25)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
               <Sparkles size={18} className="text-emerald" />
@@ -383,7 +383,7 @@ export default function CalorieTracker() {
                 padding: '0.6rem',
                 border: 'none',
                 borderRadius: '0.75rem',
-                color: '#080d1a',
+                color: '#ffffff',
                 fontWeight: 700,
                 fontSize: '0.85rem'
               }}
@@ -418,7 +418,7 @@ export default function CalorieTracker() {
               {/* Scan target guidelines */}
               <div style={{
                 width: '80%', height: '60%', border: '2px dashed var(--lime)', borderRadius: '0.5rem',
-                boxShadow: '0 0 20px rgba(132, 204, 22, 0.2)', position: 'relative'
+                boxShadow: '0 0 20px rgba(255, 106, 0, 0.2)', position: 'relative'
               }}>
                 {/* Horizontal scanner beam line */}
                 <div style={{
@@ -442,7 +442,7 @@ export default function CalorieTracker() {
                 setShowScanner(false);
               }}
               className="bg-gradient-emerald-lime"
-              style={{ width: '100%', padding: '0.75rem', border: 'none', borderRadius: '0.75rem', color: '#080d1a', fontWeight: 700 }}
+              style={{ width: '100%', padding: '0.75rem', border: 'none', borderRadius: '0.75rem', color: '#ffffff', fontWeight: 700 }}
             >
               Simulate Scan: "Protein Fuel Shake"
             </button>
@@ -538,7 +538,7 @@ export default function CalorieTracker() {
               <button 
                 type="submit" 
                 className="bg-gradient-emerald-lime"
-                style={{ width: '100%', padding: '0.75rem', border: 'none', borderRadius: '0.75rem', color: '#080d1a', fontWeight: 700, marginTop: '1rem' }}
+                style={{ width: '100%', padding: '0.75rem', border: 'none', borderRadius: '0.75rem', color: '#ffffff', fontWeight: 700, marginTop: '1rem' }}
               >
                 Log Meal Plate
               </button>

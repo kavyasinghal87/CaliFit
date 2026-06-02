@@ -107,7 +107,7 @@ export default function Community() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button className="bg-gradient-emerald-lime" style={{ 
-              border: 'none', color: '#080d1a', fontWeight: 700, padding: '0.5rem 1.25rem', borderRadius: '0.5rem', fontSize: '0.8rem'
+              border: 'none', color: '#ffffff', fontWeight: 700, padding: '0.5rem 1.25rem', borderRadius: '0.5rem', fontSize: '0.8rem'
             }}>
               Post Feed
             </button>
@@ -153,7 +153,7 @@ export default function Community() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{post.author}</span>
                       <span className="glass-panel" style={{ 
-                        padding: '0.1rem 0.4rem', fontSize: '0.65rem', color: 'var(--emerald)', borderColor: 'rgba(16,185,129,0.3)',
+                        padding: '0.1rem 0.4rem', fontSize: '0.65rem', color: 'var(--emerald)', borderColor: 'rgba(255,106,0,0.3)',
                         background: 'transparent', fontWeight: 600
                       }}>{post.role}</span>
                     </div>
@@ -188,7 +188,7 @@ export default function Community() {
                   padding: '0.75rem 1rem', background: 'rgba(255,255,255,0.01)', borderColor: 'var(--border-secondary)',
                   display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem'
                 }}>
-                  <div style={{ background: 'rgba(132, 204, 22, 0.1)', padding: '0.4rem', borderRadius: '0.5rem' }}>
+                  <div style={{ background: 'rgba(255, 106, 0, 0.1)', padding: '0.4rem', borderRadius: '0.5rem' }}>
                     <Flame size={16} className="text-lime" />
                   </div>
                   <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>{post.workout}</span>
@@ -240,8 +240,8 @@ export default function Community() {
                     alignItems: 'center',
                     padding: '0.6rem 0.75rem',
                     borderRadius: '0.75rem',
-                    background: isKavya ? 'rgba(16, 185, 129, 0.05)' : 'transparent',
-                    border: isKavya ? '1px solid rgba(16, 185, 129, 0.2)' : '1px solid transparent'
+                    background: isKavya ? 'rgba(255, 106, 0, 0.05)' : 'transparent',
+                    border: isKavya ? '1px solid rgba(255, 106, 0, 0.2)' : '1px solid transparent'
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -306,7 +306,7 @@ export default function Community() {
                     <button 
                       className="bg-gradient-emerald-lime"
                       style={{ 
-                        border: 'none', color: '#080d1a', fontWeight: 700,
+                        border: 'none', color: '#ffffff', fontWeight: 700,
                         padding: '0.3rem 0.75rem', fontSize: '0.75rem', borderRadius: '0.5rem'
                       }}
                     >
