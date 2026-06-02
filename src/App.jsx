@@ -186,7 +186,7 @@ export default function App() {
             {sidebarLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={() => { setActiveTab(link.name); showToast(`Navigated to ${link.name}`); }}
+                onClick={() => { setActiveTab(link.name); }}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -296,7 +296,7 @@ export default function App() {
                 {sidebarLinks.map(link => (
                   <button
                     key={link.name}
-                    onClick={() => { setActiveTab(link.name); setShowMobileSidebar(false); showToast(`Navigated to ${link.name}`); }}
+                    onClick={() => { setActiveTab(link.name); setShowMobileSidebar(false); }}
                     style={{
                       display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', padding: '0.75rem 1rem',
                       borderRadius: '0.75rem', border: 'none',
@@ -336,7 +336,9 @@ export default function App() {
         maxWidth: '1200px',
         margin: '0 auto'
       }} className="main-content-layout">
-        {renderActiveContent()}
+        <div key={activeTab} className="tab-transition">
+          {renderActiveContent()}
+        </div>
       </main>
 
       {/* MOBILE BOTTOM NAVIGATION BAR */}
@@ -350,7 +352,7 @@ export default function App() {
           {sidebarLinks.slice(0, 4).map(link => (
             <button
               key={link.name}
-              onClick={() => { setActiveTab(link.name); showToast(`Navigated to ${link.name}`); }}
+              onClick={() => { setActiveTab(link.name); }}
               style={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 background: 'transparent', border: 'none',
@@ -363,7 +365,7 @@ export default function App() {
             </button>
           ))}
           <button
-            onClick={() => { setActiveTab('AI Coach'); showToast(`Navigated to AI Coach`); }}
+            onClick={() => { setActiveTab('AI Coach'); }}
             style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
               background: 'transparent', border: 'none',
