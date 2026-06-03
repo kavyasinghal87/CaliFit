@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Zap, Activity, Target, Shield, Heart, Award, 
   ChevronRight, Compass, Users, Sparkles, MessageSquare, 
@@ -7,8 +7,35 @@ import {
 import heroMockup from '../assets/hero_dashboard_mockup.png';
 import steakImg from '../assets/scanned_steak_dish.png';
 import transformImg from '../assets/fitness_transformation.png';
+import workoutBg from '../assets/hero_bg_workout_tracking.png';
+import mealBg from '../assets/hero_bg_meal_logging.png';
+import strengthBg from '../assets/hero_bg_strength_training.png';
+import cardioBg from '../assets/hero_bg_cardio_workout.png';
 
 export default function LandingPage({ onEnterDashboard }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [bgState, setBgState] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    // Run once on mount to capture initial scroll if user reloaded page below top
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBgState(prev => (prev + 1) % 3);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
   const features = [
     {
       icon: <Utensils size={24} className="text-emerald" />,
@@ -50,8 +77,29 @@ export default function LandingPage({ onEnterDashboard }) {
   return (
     <div className="bg-gradient-dark-glow min-h-screen" style={{ overflowX: 'hidden' }}>
       
-      {/* NAVBAR */}
-      <nav className="glass-panel landing-nav">
+      {/* Background Grid Lines Wrapper */}
+      <div className="landing-hero-grid-container">
+        {/* Subtle grid pattern background overlay */}
+        <div className="landing-bg-grid-pattern"></div>
+
+        {/* Ambient Integrated Background Graphics */}
+        <div className="landing-hero-bg-graphics">
+          {/* LEFT GRAPHIC: Workout and Progress scenes */}
+          <div className="landing-hero-bg-graphic left">
+            <div className={`graphic-image ${bgState === 0 ? 'active' : ''}`} style={{ backgroundImage: `url(${workoutBg})` }}></div>
+            <div className={`graphic-image ${bgState === 1 ? 'active' : ''}`} style={{ backgroundImage: `url(${strengthBg})` }}></div>
+            <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${cardioBg})` }}></div>
+          </div>
+          {/* RIGHT GRAPHIC: Calorie and Meal scenes */}
+          <div className="landing-hero-bg-graphic right">
+            <div className={`graphic-image ${bgState === 0 ? 'active' : ''}`} style={{ backgroundImage: `url(${mealBg})` }}></div>
+            <div className={`graphic-image ${bgState === 1 ? 'active' : ''}`} style={{ backgroundImage: `url(${cardioBg})` }}></div>
+            <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${strengthBg})` }}></div>
+          </div>
+        </div>
+
+        {/* NAVBAR */}
+        <nav className={`glass-panel landing-nav ${scrolled ? 'scrolled' : ''}`}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
           <div className="bg-gradient-emerald-lime" style={{ 
             padding: '0.5rem', 
@@ -92,16 +140,7 @@ export default function LandingPage({ onEnterDashboard }) {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <header className="animate-fade-in-up" style={{ 
-        maxWidth: '1200px', 
-        margin: '4rem auto 1rem', 
-        padding: '0 1rem', 
-        textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}>
+      <header className="animate-fade-in-up landing-hero">
         {/* Glow pill */}
         <div className="glass-panel" style={{ 
           padding: '0.4rem 1.25rem', 
@@ -390,6 +429,7 @@ export default function LandingPage({ onEnterDashboard }) {
 
         </div>
       </section>
+      </div>
 
       {/* TRUSTED BY BRAND TICKER */}
       <section className="brand-ticker-section" style={{ 

@@ -457,18 +457,44 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, label {
 }
 
 /* Landing Page Header & Spacing fixes */
-.landing-nav {
-  margin: 1.5rem auto;
+.glass-panel.landing-nav {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 1200px;
   width: calc(100% - 2rem);
   padding: 0.75rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 1rem;
   z-index: 100;
   box-sizing: border-box;
+
+  /* Lightweight translucent starting state */
+  background: rgba(10, 10, 10, 0.2);
+  border-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: none;
+  transition: 
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    top 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel.landing-nav.scrolled {
+  /* Premium solid dark glassmorphism state on scroll */
+  background: rgba(18, 18, 18, 0.85);
+  border-color: rgba(255, 106, 0, 0.2);
+  backdrop-filter: var(--glass-blur); /* blur(12px) */
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 106, 0, 0.05);
+  top: 1rem;
+  padding: 0.6rem 2rem;
 }
 
 .landing-logo-text {
@@ -517,10 +543,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, label {
 }
 
 @media (max-width: 768px) {
-  .landing-nav {
-    margin: 1rem auto;
+  .glass-panel.landing-nav {
+    top: 1rem;
     width: calc(100% - 1.5rem);
     padding: 0.6rem 1.25rem;
+  }
+  .glass-panel.landing-nav.scrolled {
+    top: 0.75rem;
+    padding: 0.5rem 1.25rem;
   }
   .landing-nav-actions {
     gap: 0.75rem;
@@ -528,10 +558,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, label {
 }
 
 @media (max-width: 480px) {
-  .landing-nav {
+  .glass-panel.landing-nav {
+    top: 0.75rem;
     padding: 0.5rem 0.75rem;
-    margin: 0.75rem auto;
     width: calc(100% - 1rem);
+  }
+  .glass-panel.landing-nav.scrolled {
+    top: 0.5rem;
+    padding: 0.4rem 0.75rem;
   }
   .landing-logo-text {
     font-size: 1.1rem;
@@ -563,6 +597,145 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, label {
 .tab-transition {
   animation: tabFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   width: 100%;
+}
+
+.landing-hero {
+  max-width: 1200px;
+  margin: 9rem auto 1rem;
+  padding: 0 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .landing-hero {
+    margin: 7.5rem auto 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-hero {
+    margin: 6.5rem auto 1rem;
+  }
+}
+
+/* Background Grid Pattern System for Hero Section */
+.landing-hero-grid-container {
+  position: relative;
+  width: 100%;
+}
+
+.landing-bg-grid-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 106, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 106, 0, 0.035) 1px, transparent 1px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.65) 60%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.65) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.landing-hero,
+.perspective-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .landing-bg-grid-pattern {
+    background-size: 40px 40px; /* Slightly tighter grid on tablets for better density scale */
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-bg-grid-pattern {
+    background-size: 30px 30px; /* Tighter grid on mobile for perfect responsive density */
+    background-image: 
+      linear-gradient(to right, rgba(255, 106, 0, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 106, 0, 0.02) 1px, transparent 1px); /* lower opacity on mobile to prevent clutter */
+  }
+}
+
+/* Ambient Integrated Background Graphics styles */
+.landing-hero-bg-graphics {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.landing-hero-bg-graphic {
+  position: absolute;
+  top: 0;
+  width: 45%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.landing-hero-bg-graphic.left {
+  left: 0;
+  -webkit-mask-image: radial-gradient(circle at 20% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0) 80%);
+  mask-image: radial-gradient(circle at 20% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0) 80%);
+}
+
+.landing-hero-bg-graphic.right {
+  right: 0;
+  -webkit-mask-image: radial-gradient(circle at 80% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0) 80%);
+  mask-image: radial-gradient(circle at 80% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0) 80%);
+}
+
+.landing-hero-bg-graphic .graphic-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: screen;
+}
+
+.landing-hero-bg-graphic .graphic-image.active {
+  opacity: 0.12; /* faint ambient glow opacity to maintain clear headline focus */
+}
+
+@media (max-width: 991px) {
+  .landing-hero-bg-graphic {
+    width: 50%;
+  }
+  .landing-hero-bg-graphic .graphic-image.active {
+    opacity: 0.08; /* even lower opacity on tablets */
+  }
+}
+
+@media (max-width: 560px) {
+  .landing-hero-bg-graphic {
+    width: 100%;
+  }
+  .landing-hero-bg-graphic.left {
+    -webkit-mask-image: radial-gradient(circle at 50% 30%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+    mask-image: radial-gradient(circle at 50% 30%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+  }
+  .landing-hero-bg-graphic.right {
+    display: none; /* hide one graphic on small mobiles to prevent any overlaps */
+  }
+  .landing-hero-bg-graphic .graphic-image.active {
+    opacity: 0.06;
+  }
 }
 
 
