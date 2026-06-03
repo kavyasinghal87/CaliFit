@@ -224,23 +224,7 @@ export default function App() {
               <button
                 key={link.name}
                 onClick={() => { setActiveTab(link.name); }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '0.75rem',
-                  border: 'none',
-                  background: activeTab === link.name ? 'rgba(255, 106, 0, 0.08)' : 'transparent',
-                  color: activeTab === link.name ? 'var(--emerald)' : 'var(--text-secondary)',
-                  fontWeight: activeTab === link.name ? 700 : 500,
-                  fontSize: '0.9rem',
-                  textAlign: 'left',
-                  transition: 'all var(--transition-fast)'
-                }}
-                onMouseOver={e=>{if(activeTab!==link.name) e.target.style.background='rgba(255,255,255,0.02)'}}
-                onMouseOut={e=>{if(activeTab!==link.name) e.target.style.background='transparent'}}
+                className={`sidebar-nav-btn ${activeTab === link.name ? 'active' : ''}`}
               >
                 {link.icon}
                 <span style={{ flex: 1 }}>{link.name}</span>
@@ -269,19 +253,7 @@ export default function App() {
 
           <button 
             onClick={handleLogout}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              width: '100%',
-              padding: '0.6rem 1rem',
-              borderRadius: '0.50rem',
-              border: 'none',
-              background: 'rgba(239, 68, 68, 0.05)',
-              color: '#ef4444',
-              fontWeight: 700,
-              fontSize: '0.85rem'
-            }}
+            className="sidebar-logout-btn"
           >
             <LogOut size={16} /> Logout
           </button>
@@ -334,13 +306,7 @@ export default function App() {
                   <button
                     key={link.name}
                     onClick={() => { setActiveTab(link.name); setShowMobileSidebar(false); }}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', padding: '0.75rem 1rem',
-                      borderRadius: '0.75rem', border: 'none',
-                      background: activeTab === link.name ? 'rgba(255, 106, 0, 0.08)' : 'transparent',
-                      color: activeTab === link.name ? 'var(--emerald)' : 'var(--text-secondary)',
-                      fontWeight: activeTab === link.name ? 700 : 500, fontSize: '0.9rem', textAlign: 'left'
-                    }}
+                    className={`sidebar-nav-btn ${activeTab === link.name ? 'active' : ''}`}
                   >
                     {link.icon} {link.name}
                   </button>
@@ -350,9 +316,9 @@ export default function App() {
 
             <button 
               onClick={handleLogout}
-              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: 'none', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontWeight: 700 }}
+              className="sidebar-logout-btn"
             >
-              Logout
+              <LogOut size={16} /> Logout
             </button>
           </div>
           

@@ -738,6 +738,56 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, label {
   }
 }
 
+/* Sidebar Navigation Styling */
+.sidebar-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sidebar-nav-btn.active {
+  background: rgba(255, 106, 0, 0.08);
+  color: var(--emerald);
+  font-weight: 700;
+}
+
+.sidebar-nav-btn.active:hover {
+  background: rgba(255, 106, 0, 0.08);
+}
+
+.sidebar-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 0.50rem;
+  border: none;
+  background: rgba(239, 68, 68, 0.05);
+  color: #ef4444;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
 
 
 
