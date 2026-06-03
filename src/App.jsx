@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Zap, LayoutDashboard, Utensils, Dumbbell, Calendar, 
-  TrendingUp, Sparkles, Users, Settings, ShieldAlert, 
-  LogOut, Menu, X, Bell, User, Flame, CheckCircle, Moon, Sun
+  TrendingUp, Sparkles, Users, Settings, 
+  LogOut, Menu, X, CheckCircle, Moon, Sun
 } from 'lucide-react';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
@@ -13,15 +13,51 @@ import ProgressTracking from './components/ProgressTracking';
 import Community from './components/Community';
 import AdminPanel from './components/AdminPanel';
 import Auth from './components/Auth';
+import { supabase } from './supabaseClient';
 
 export default function App() {
   const [theme, setTheme] = useState('dark');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authScreen, setAuthScreen] = useState('landing');
-  const [user, setUser] = useState({ name: 'Kavya Singhal', email: 'kavyabtp2005@gmail.com', avatar: 'KS' });
+  const [user, setUser] = useState({ name: '', email: '', avatar: '' });
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+
+  function handleSession(session) {
+    if (session) {
+      const emailVal = session.user.email;
+      const nameVal = session.user.user_metadata?.full_name || session.user.user_metadata?.name || emailVal.split('@')[0];
+      const initials = nameVal.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+
+      setUser({
+        name: nameVal,
+        email: emailVal,
+        avatar: initials || 'US'
+      });
+      setIsLoggedIn(true);
+    } else {
+      setUser({ name: '', email: '', avatar: '' });
+      setIsLoggedIn(false);
+    }
+  }
+
+  // Monitor Supabase auth session
+  useEffect(() => {
+    // 1. Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      handleSession(session);
+    });
+
+    // 2. Subscribe to auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      handleSession(session);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   // Sync theme attribute with DOM for CSS variables
   useEffect(() => {
@@ -38,7 +74,8 @@ export default function App() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     setIsLoggedIn(false);
     setAuthScreen('landing');
     showToast("Logged out successfully");
@@ -153,7 +190,7 @@ export default function App() {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', position: 'relative', width: '100%', overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', height: '100vh', position: 'relative', width: '100%', overflow: 'hidden' }}>
       
       {/* SIDEBAR NAVIGATION - DESKTOP */}
       <aside className="glass-panel desktop-only" style={{ 
