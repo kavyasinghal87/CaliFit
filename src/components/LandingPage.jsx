@@ -11,6 +11,8 @@ import workoutBg from '../assets/hero_bg_workout_tracking.png';
 import mealBg from '../assets/hero_bg_meal_logging.png';
 import strengthBg from '../assets/hero_bg_strength_training.png';
 import cardioBg from '../assets/hero_bg_cardio_workout.png';
+import dumbbellBg from '../assets/hero_bg_dumbbell_training.png';
+import recoveryBg from '../assets/hero_bg_recovery_stretch.png';
 
 export default function LandingPage({ onEnterDashboard }) {
   const [scrolled, setScrolled] = useState(false);
@@ -88,13 +90,13 @@ export default function LandingPage({ onEnterDashboard }) {
           <div className="landing-hero-bg-graphic left">
             <div className={`graphic-image ${bgState === 0 ? 'active' : ''}`} style={{ backgroundImage: `url(${workoutBg})` }}></div>
             <div className={`graphic-image ${bgState === 1 ? 'active' : ''}`} style={{ backgroundImage: `url(${strengthBg})` }}></div>
-            <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${cardioBg})` }}></div>
+            <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${dumbbellBg})` }}></div>
           </div>
           {/* RIGHT GRAPHIC: Calorie and Meal scenes */}
           <div className="landing-hero-bg-graphic right">
             <div className={`graphic-image ${bgState === 0 ? 'active' : ''}`} style={{ backgroundImage: `url(${mealBg})` }}></div>
             <div className={`graphic-image ${bgState === 1 ? 'active' : ''}`} style={{ backgroundImage: `url(${cardioBg})` }}></div>
-            <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${strengthBg})` }}></div>
+            <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${recoveryBg})` }}></div>
           </div>
         </div>
 
