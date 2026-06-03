@@ -13,6 +13,8 @@ import strengthBg from '../assets/hero_bg_strength_training.png';
 import cardioBg from '../assets/hero_bg_cardio_workout.png';
 import dumbbellBg from '../assets/hero_bg_dumbbell_training.png';
 import recoveryBg from '../assets/hero_bg_recovery_stretch.png';
+import boxingCoachBg from '../assets/hero_bg_boxing_coach.png';
+import boxingBagBg from '../assets/hero_bg_boxing_bag.png';
 
 export default function LandingPage({ onEnterDashboard }) {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +36,7 @@ export default function LandingPage({ onEnterDashboard }) {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setBgState(prev => (prev + 1) % 3);
+      setBgState(prev => (prev + 1) % 4);
     }, 4500);
     return () => clearInterval(timer);
   }, []);
@@ -91,12 +93,14 @@ export default function LandingPage({ onEnterDashboard }) {
             <div className={`graphic-image ${bgState === 0 ? 'active' : ''}`} style={{ backgroundImage: `url(${workoutBg})` }}></div>
             <div className={`graphic-image ${bgState === 1 ? 'active' : ''}`} style={{ backgroundImage: `url(${strengthBg})` }}></div>
             <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${dumbbellBg})` }}></div>
+            <div className={`graphic-image ${bgState === 3 ? 'active' : ''}`} style={{ backgroundImage: `url(${boxingCoachBg})` }}></div>
           </div>
           {/* RIGHT GRAPHIC: Calorie and Meal scenes */}
           <div className="landing-hero-bg-graphic right">
             <div className={`graphic-image ${bgState === 0 ? 'active' : ''}`} style={{ backgroundImage: `url(${mealBg})` }}></div>
             <div className={`graphic-image ${bgState === 1 ? 'active' : ''}`} style={{ backgroundImage: `url(${cardioBg})` }}></div>
             <div className={`graphic-image ${bgState === 2 ? 'active' : ''}`} style={{ backgroundImage: `url(${recoveryBg})` }}></div>
+            <div className={`graphic-image ${bgState === 3 ? 'active' : ''}`} style={{ backgroundImage: `url(${boxingBagBg})` }}></div>
           </div>
         </div>
 
