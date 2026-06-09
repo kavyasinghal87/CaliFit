@@ -645,6 +645,27 @@ export default function Auth({ onLoginSuccess, initialMode = 'login', onBackToLa
             </span>
           </div>
 
+          <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+            <button
+              type="button"
+              onClick={() => onLoginSuccess({ name: "Demo User", email: "demo@example.com", avatar: "DU" })}
+              className="glass-panel"
+              style={{
+                width: '100%',
+                padding: '0.6rem',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                borderColor: 'var(--emerald)',
+                color: 'var(--emerald)',
+                background: 'rgba(16, 185, 129, 0.05)',
+                cursor: 'pointer',
+                borderRadius: '10px'
+              }}
+            >
+              Bypass Auth (Developer Demo Mode)
+            </button>
+          </div>
+
         </div>
 
       </div>
