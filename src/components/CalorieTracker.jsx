@@ -26,6 +26,7 @@ export default function CalorieTracker() {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [apiError, setApiError] = useState(null);
+  const [mealTextDescription, setMealTextDescription] = useState('');
 
   const videoRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -242,6 +243,123 @@ export default function CalorieTracker() {
       console.error(err);
       setIsAnalyzing(false);
     }
+  };
+
+  const analyzeMealText = async (textDescription = '') => {
+    const queryText = textDescription.trim() || mealTextDescription.trim();
+    if (!queryText) return;
+
+    setIsAnalyzing(true);
+    setApiError(null);
+    setScannedImage(null); // Clear any old image since it's text-based
+
+    // Simulate active scan loader delay (gives user a premium visual experience)
+    const scanDelayPromise = new Promise(resolve => setTimeout(resolve, 2500));
+
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      let result = null;
+
+      if (apiKey && apiKey !== 'your_copied_key_here' && !apiKey.includes('your_')) {
+        try {
+          const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{
+                  parts: [
+                    {
+                      text: `You are a professional fitness coach and nutritionist. Analyze this meal description: "${queryText}". Estimate the food items, portions, and total calories (kcal), protein (g), carbs (g), fat (g), and fiber (g). Respond ONLY with a valid raw JSON object. Do not wrap it in markdown block quotes (like \`\`\`json). The structure must be EXACTLY: { "foodName": "Name of the dish", "portion": "Estimated portion size", "kcal": number, "protein": number, "carbs": number, "fat": number, "fiber": number }.`
+                    }
+                  ]
+                }]
+              })
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`Gemini API error: Status ${response.status}`);
+          }
+
+          const data = await response.json();
+          let responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+          if (!responseText) {
+            throw new Error("Invalid response structure from Gemini API");
+          }
+
+          // Clean up any potential markdown wrap
+          responseText = responseText.replace(/```json/g, '').replace(/```/g, '').trim();
+          result = JSON.parse(responseText);
+        } catch (err) {
+          console.error("Live text scan failed, falling back to simulation:", err);
+          setApiError("Live text analysis failed. Using Simulation Mode instead.");
+        }
+      }
+
+      if (!result) {
+        await scanDelayPromise;
+        // Local keyword-based mock parser for testing
+        const queryLower = queryText.toLowerCase();
+        const mockMatches = [
+          { keywords: ['egg', 'avocado', 'toast'], foodName: "Avocado Toast with Poached Egg", portion: "1 slice toast + 1 egg + 1/2 avocado", kcal: 340, protein: 14, carbs: 24, fat: 22, fiber: 7 },
+          { keywords: ['salmon', 'fish', 'rice'], foodName: "Grilled Salmon with Quinoa & Greens", portion: "150g salmon + 1 cup quinoa", kcal: 560, protein: 42, carbs: 38, fat: 18, fiber: 5 },
+          { keywords: ['chicken', 'salad', 'breast'], foodName: "Grilled Chicken Breast Salad", portion: "150g chicken + mixed vegetables", kcal: 410, protein: 38, carbs: 10, fat: 16, fiber: 4 },
+          { keywords: ['waffle', 'berry', 'protein'], foodName: "Protein Waffles with Berries", portion: "2 waffles + protein cream + blueberries", kcal: 380, protein: 28, carbs: 45, fat: 6, fiber: 8 }
+        ];
+
+        const match = mockMatches.find(m => m.keywords.some(kw => queryLower.includes(kw)));
+        if (match) {
+          result = { ...match, foodName: `${match.foodName} (Simulated)` };
+        } else {
+          // Default fallback based on word count
+          const wordCount = queryText.split(' ').length;
+          result = {
+            foodName: queryText.substring(0, 35) + (queryText.length > 35 ? '...' : ''),
+            portion: "1 serving",
+            kcal: Math.min(800, Math.max(150, wordCount * 70)),
+            protein: Math.min(60, Math.max(5, Math.floor(wordCount * 4))),
+            carbs: Math.min(100, Math.max(10, Math.floor(wordCount * 6))),
+            fat: Math.min(45, Math.max(2, Math.floor(wordCount * 2))),
+            fiber: Math.min(15, Math.max(0, Math.floor(wordCount * 0.8)))
+          };
+        }
+      } else {
+        result = {
+          foodName: result.foodName || queryText.substring(0, 35),
+          portion: result.portion || "1 serving",
+          kcal: Number(result.kcal) || 0,
+          protein: Number(result.protein) || 0,
+          carbs: Number(result.carbs) || 0,
+          fat: Number(result.fat) || 0,
+          fiber: Number(result.fiber) || 0
+        };
+      }
+
+      await scanDelayPromise;
+      setAnalysisResult(result);
+      setIsAnalyzing(false);
+      setShowMealScanner(false);
+      setShowResults(true);
+      setMealTextDescription(''); // Reset text field
+    } catch (err) {
+      console.error(err);
+      setIsAnalyzing(false);
+    }
+  };
+
+  const handleSimulateQuickScan = () => {
+    // Pick a random description and run it
+    const sampleMeals = [
+      "Protein Avocado Toast with a fried egg",
+      "Seared Salmon Bowl with brown rice and broccoli",
+      "High Protein Mediterranean Chicken Salad",
+      "Oat protein waffles with blueberries"
+    ];
+    const randomMeal = sampleMeals[Math.floor(Math.random() * sampleMeals.length)];
+    analyzeMealText(randomMeal);
   };
 
   const adjustMacro = (field, amount) => {
@@ -843,14 +961,23 @@ export default function CalorieTracker() {
 
             {/* Viewfinder Wrapper */}
             <div style={{
-              width: '100%', height: '320px', background: '#020617', borderRadius: '1.25rem', position: 'relative',
-              overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-primary)'
+              width: '100%', 
+              height: (!cameraStream && !isAnalyzing && !scannedImage) ? '380px' : '320px', 
+              background: '#020617', 
+              borderRadius: '1.25rem', 
+              position: 'relative',
+              overflow: 'hidden', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              border: '1px solid var(--border-primary)',
+              transition: 'height 0.3s ease'
             }}>
               
               {isAnalyzing ? (
                 // Scanning animation & processing state
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', zIndex: 10 }}>
-                  {scannedImage && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', zIndex: 10, width: '100%', height: '100%', justifyContent: 'center' }}>
+                  {scannedImage ? (
                     <img 
                       src={scannedImage} 
                       alt="Scanned Plate Preview" 
@@ -859,13 +986,22 @@ export default function CalorieTracker() {
                         objectFit: 'cover', opacity: 0.6 
                       }} 
                     />
+                  ) : (
+                    <div style={{
+                      position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                      background: 'radial-gradient(circle, rgba(255, 106, 0, 0.15) 0%, transparent 70%)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center'
+                    }}>
+                      <Apple size={64} className="text-emerald animate-pulse" style={{ opacity: 0.3 }} />
+                    </div>
                   )}
                   {/* Laser line running down the viewfinder */}
                   <div className="scanner-laser-line"></div>
                   
                   <div className="glass-panel" style={{ 
                     padding: '0.75rem 1.25rem', background: 'rgba(18,18,18,0.85)', 
-                    display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid var(--primary)'
+                    display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid var(--primary)',
+                    zIndex: 10
                   }}>
                     <Sparkles className="text-emerald animate-spin-slow" size={16} />
                     <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>
@@ -904,18 +1040,76 @@ export default function CalorieTracker() {
                 </>
               ) : (
                 // Viewfinder Fallback (No camera active / prompt)
-                <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                  <Camera size={48} style={{ opacity: 0.4, color: 'var(--primary)' }} />
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', padding: '0 1rem' }}>
-                    Place food in viewfinder to scan. Camera failed or permission not granted.
-                  </p>
+                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', width: '100%', justifyContent: 'center' }}>
+                    <Camera size={20} style={{ opacity: 0.5, color: 'var(--primary)' }} />
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Camera stream inactive</span>
+                  </div>
+                  
                   <button 
                     onClick={triggerFileUpload}
                     className="bg-gradient-emerald-lime"
-                    style={{ padding: '0.5rem 1.25rem', border: 'none', borderRadius: '0.75rem', color: '#ffffff', fontWeight: 700, fontSize: '0.85rem' }}
+                    style={{ padding: '0.45rem 1rem', border: 'none', borderRadius: '0.75rem', color: '#ffffff', fontWeight: 700, fontSize: '0.8rem', width: '80%' }}
                   >
                     Upload Photo or Select File
                   </button>
+
+                  <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.2rem 0' }}>
+                    <div style={{ flex: 1, height: '1px', background: 'var(--border-primary)' }}></div>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>or describe meal</span>
+                    <div style={{ flex: 1, height: '1px', background: 'var(--border-primary)' }}></div>
+                  </div>
+
+                  <textarea
+                    placeholder="e.g. 2 fried eggs, 2 slices whole wheat toast, 1 banana..."
+                    value={mealTextDescription}
+                    onChange={(e) => setMealTextDescription(e.target.value)}
+                    style={{
+                      width: '100%',
+                      height: '75px',
+                      fontSize: '0.8rem',
+                      resize: 'none',
+                      background: 'rgba(255,255,255,0.02)',
+                      border: '1px solid var(--border-primary)',
+                      borderRadius: '0.5rem',
+                      padding: '0.4rem 0.6rem',
+                      color: 'var(--text-primary)'
+                    }}
+                  />
+
+                  <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+                    <button
+                      onClick={() => analyzeMealText()}
+                      disabled={!mealTextDescription.trim()}
+                      className="glass-panel"
+                      style={{
+                        flex: 1,
+                        padding: '0.45rem',
+                        fontSize: '0.8rem',
+                        background: mealTextDescription.trim() ? 'rgba(255, 106, 0, 0.1)' : 'transparent',
+                        borderColor: mealTextDescription.trim() ? 'var(--primary)' : 'var(--border-primary)',
+                        color: mealTextDescription.trim() ? '#ffffff' : 'var(--text-muted)',
+                        fontWeight: 700,
+                        cursor: mealTextDescription.trim() ? 'pointer' : 'not-allowed'
+                      }}
+                    >
+                      Analyze AI
+                    </button>
+                    <button
+                      onClick={handleSimulateQuickScan}
+                      className="glass-panel"
+                      style={{
+                        padding: '0.45rem 0.75rem',
+                        fontSize: '0.8rem',
+                        borderColor: 'var(--lime)',
+                        color: 'var(--lime)',
+                        background: 'transparent',
+                        fontWeight: 700
+                      }}
+                    >
+                      Simulate Demo
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
